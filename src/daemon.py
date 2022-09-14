@@ -1,5 +1,5 @@
 """ Usage:
-    <file-name> --usrs=USERS_FILE --msgs=MESSAGES_FILE --sleep=NUM_OF_MINUTES --uname=UNAME --pwd=PWD [--out=OUTPUT_FILE] [--debug]
+    <file-name> --usrs=USERS_FILE --msgs=MESSAGES_FILE --sleep=NUM_OF_MINUTES --uname=UNAME --pwd=PWD --domain=DOMAIN_URL [--out=OUTPUT_FILE] [--debug]
 
 Options:
   --help                           Show this message and exit
@@ -54,10 +54,9 @@ def get_messages_to_send(msgs_fn):
     
     return msgs_to_send
 
-DOMAIN = 'https://rocketchat.cs.huji.ac.il/'
+
     
 if __name__ == "__main__":
-
     # Parse command line arguments
     args = docopt(__doc__)
     usrs_fn = Path(args["--usrs"])
@@ -65,6 +64,7 @@ if __name__ == "__main__":
     sleep_in_mins = int(args["--sleep"])
     uname = args["--uname"]
     pwd = args["--pwd"] # <- this sucks
+    domain = args["--domain"]
 
     # Determine logging level
     debug = args["--debug"]
@@ -80,10 +80,10 @@ if __name__ == "__main__":
     # log in to RC and do some dummy operation to make sure it's working
     api = RocketChatAPI(settings = {'username': uname,
                                     'password': pwd,
-                                    'domain': DOMAIN})
+                                    'domain': domain})
     
     
-    assert(api.get_public_rooms())
+    assert(api.get_private_rooms())
     
     users_dict = json.loads(open(usrs_fn, encoding = "utf8").read())
     sleep_duration = sleep_in_mins * 60
