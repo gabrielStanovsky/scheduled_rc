@@ -7,7 +7,7 @@ A crappy message scheduler for Rocket.Chat.
 1. Install packages:
 `pip install -r requirements.txt`
 
-2. Setup a users file, see example [here](data/example_users.json). This maps between a user nick name of your choice to their RC id (I couldn't figure out how to do this reliably through the API).
+2. Setup a users file, see example [here](data/example_users.json). This maps from a user nickname of your choice to their RC id (I couldn't figure out how to do this reliably through the API).
 
 ## Usage
 1. Put your messages along with intended send time in a message file. See example [here](data/example_messages.json).
